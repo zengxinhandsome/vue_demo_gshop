@@ -1,22 +1,23 @@
 <template>
 	<div class="shop_container">
 		<ul class="shop_list">
-			<li class="shop_li border-1px">
+			<li class="shop_li border-1px" @click="$router.push('/shop')">
 			<a>
 				<div class="shop_left">
-					<img class="shop_img" src="./images/shop/1.jpg" height="200" width="200">
+					<img class="shop_img" src="./images/shop/1.jpg">
 				</div>
 				<div class="shop_right">
 					<section class="shop_detail_header">
-						<h4 class="shop_title ellipsis" >呵呵呵呵呵</h4>
+						<h4 class="shop_title ellipsis" >油焖大虾</h4>
 						<ul class="shop_detail_ul">
-							<li class="supports">中国航</li>
+							<li class="supports">蜂鸟专送</li>
 						</ul>
 					</section>
 					<section class="shop_rating_order">
 						<section class="shop_rating_order_left">
+							<Star :score="shop.ration" :size="24"/>
 							<div class="rating_section">
-								
+								{{shop.ration}}
 							</div>
 							<div class="order_section">
 								月售222单
@@ -43,15 +44,16 @@
 				</div>
 				<div class="shop_right">
 					<section class="shop_detail_header">
-						<h4 class="shop_title ellipsis" >呵呵呵呵呵</h4>
+						<h4 class="shop_title ellipsis" >可乐鸡蛋卷</h4>
 						<ul class="shop_detail_ul">
-							<li class="supports">中国航</li>
+							<li class="supports">蜂鸟专送</li>
 						</ul>
 					</section>
 					<section class="shop_rating_order">
 						<section class="shop_rating_order_left">
+							<Star :score="shop.ration" :size="24"/>
 							<div class="rating_section">
-								
+								{{shop.ration}}
 							</div>
 							<div class="order_section">
 								月售222单
@@ -78,15 +80,16 @@
 				</div>
 				<div class="shop_right">
 					<section class="shop_detail_header">
-						<h4 class="shop_title ellipsis" >呵呵呵呵呵</h4>
+						<h4 class="shop_title ellipsis" >美味灌汤包</h4>
 						<ul class="shop_detail_ul">
-							<li class="supports">中国航</li>
+							<li class="supports">蜂鸟专送</li>
 						</ul>
 					</section>
 					<section class="shop_rating_order">
 						<section class="shop_rating_order_left">
+							<Star :score="shop.ration" :size="24"/>
 							<div class="rating_section">
-								
+								{{shop.ration}}
 							</div>
 							<div class="order_section">
 								月售222单
@@ -113,15 +116,16 @@
 				</div>
 				<div class="shop_right">
 					<section class="shop_detail_header">
-						<h4 class="shop_title ellipsis" >呵呵呵呵呵</h4>
+						<h4 class="shop_title ellipsis" >好吃麻辣烫</h4>
 						<ul class="shop_detail_ul">
-							<li class="supports">中国航</li>
+							<li class="supports">蜂鸟专送</li>
 						</ul>
 					</section>
 					<section class="shop_rating_order">
 						<section class="shop_rating_order_left">
+							<Star :score="shop.ration" :size="24"/>
 							<div class="rating_section">
-								
+								{{shop.ration}}
 							</div>
 							<div class="order_section">
 								月售222单
@@ -146,9 +150,19 @@
 </template>
 
 <script>
+import Star from '../../components/Star/Star.vue'
 	export default {
-
+	data () {
+		return {
+			shop: {
+				ration: 4.5
+			}
+		}
+	},
+	components: {
+		Star
 	}
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

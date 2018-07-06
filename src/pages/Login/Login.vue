@@ -14,7 +14,7 @@
 						<section class="login_message">
 							<input type="tel" maxlength="11" placeholder="手机号">
 							<button class="get_verification">
-							已发送获取验证码
+							获取验证码
 						</button>
 					</section>
 					<section class="login_verification">
@@ -25,7 +25,7 @@
 						<a href="javascript:;">《用户服务协议》</a>
 					</section>
 				</div>
-				<div>
+				<!-- <div>
 					<section>
 						<section class="login_message">
 							<input type="text" maxlength="11" placeholder="手机/邮箱/用户名">
@@ -43,7 +43,7 @@
 							<img class="get_verification" alt="captcha">
 						</section>
 					</section>
-				</div>
+				</div> -->
 				<button class="login_submit">登录</button>
 			</form>
 			<a href="javascript:;" class="about_us">关于我们</a>
@@ -93,7 +93,7 @@ export default {
       .login_content
         >form
           >div
-            display none
+            display block
             &.on
               display block
             input

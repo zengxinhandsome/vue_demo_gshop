@@ -45,7 +45,7 @@
       text-align center
       maigin-left -5%
       .header_title_text
-        font-size 20px
+        font-size 17px
         color white
         display block
       .ellipsis

@@ -1,6 +1,6 @@
 <template>
   <section class="msite">
-    <HeaderTop title="昌平区北七家宏福科技园(337省道北)">
+    <HeaderTop :title="title">
        <span class="header_search" slot="left">
         <i class="iconfont icon-sousuo"></i>
       </span>
@@ -134,6 +134,11 @@
   import 'swiper/dist/css/swiper.min.css'
 
   export default {
+    data() {
+      return {
+        title: "江西省南昌市江西农业大学"
+      }
+    },
     mounted() {
       // 创建一个swiper实例对象，来实现轮播
       new Swiper('.swiper-container', {
@@ -157,7 +162,7 @@
       width 100%
       .msite_nav
         bottom-border-1px(#e4e4e4)
-        margin-top 15px
+        margin-top 45px
         height 200px
         background #fff
         .swiper-container
