@@ -2,7 +2,7 @@
   <div>
     <div class="shopcart">
       <div class="content">
-        <div class="content-left">
+        <div class="content-left" @click="toggleShow">
           <div class="logo-wrapper">
             <div class="logo" :class="{highlight: totalCount}">
               <i class="iconfont icon-gouwuche" :class="{highlight: totalCount}"></i>
@@ -18,31 +18,39 @@
           </div>
         </div>
       </div>
-        <div class="shopcart-list">
+        <div class="shopcart-list" v-show="listShow">
           <div class="list-header">
             <h1 class="title">购物车</h1>
-            <span class="empty">清空</span>
+            <span class="empty" @click="clearCart">清空</span>
           </div>
           <div class="list-content">
             <ul>
-              <li class="food">
-                <span class="name">food.name</span>
-                <div class="price"><span>￥food.price</span></div>
-                <!-- <CartControl :food="food"/> -->
+              <li class="food" v-for="(food, index) in cartFoods" :key="index">
+                <span class="name">{{food.name}}</span>
+                <div class="price"><span>￥{{food.price}}</span></div>
+                <CartControl :food="food"/>
               </li>
             </ul>
           </div>
         </div>
     </div>
-    <!-- <div class="list-mask"></div> -->
+    <div class="list-mask" v-show="listShow" @click="toggleShow"></div>
   </div>
 
 </template>
 
 <script>
+  import {MessageBox} from 'mint-ui'
+  import 'mint-ui/lib/style.min.css'
 	import {mapState, mapGetters} from 'vuex'
 	import CartControl from '../../components/CartControl/CartControl.vue'
+  import BScroll from 'better-scroll'
 	export default {
+    data() {
+      return {
+        isShow: false
+      }
+    },
 		computed: {
 			...mapState(["cartFoods", "info"]),
 			...mapGetters(["totalCount", "totalPrice"]),
@@ -61,8 +69,43 @@
 				} else {
 					return "结算"
 				}
-			}
+			},
+      listShow() {
+        // 如果总数量为0，直接不显示
+        if(this.totalCount === 0) {
+          this.isShow = false;
+          return false;
+        }
+        if(this.isShow) {
+          this.$nextTick(() => {
+            // 判断scroll 实例是否已经存在，如果已经存在就不需要重复创建了
+            // 因为创建了scroll 实例后，这个元素的事件监听都会交给BScroll 对象管理
+            // 如果创建多个实例，则点击一次，会执行多次事件回调函数
+            if(!this.scroll) {
+              this.scroll = new BScroll(".list-content", {
+                click: true
+              });
+            } else {
+              this.scroll.refresh();  // 让滚动条刷新一下，重新统计内容的高度
+            }
+          });
+        }
+        return this.isShow;
+      }
 		},
+    methods: {
+      toggleShow() {
+        // 只有当总数量 > 0 时才切换
+        if(this.totalCount > 0) {
+         this.isShow = !this.isShow;
+        }
+      },
+      clearCart() {
+        MessageBox.confirm("确认清空购物车吗？").then(action => {
+          this.$store.dispatch("clearCart");
+        }, () => {});
+      }
+    },
 		components: {
 			CartControl
 		}
@@ -219,7 +262,7 @@
             font-size 14px
             font-weight 700
             color rgb(240, 20, 20)
-          .cartcontrol-wrapper
+          .cartcontrol
             position absolute
             right 0
             bottom 6px

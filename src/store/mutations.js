@@ -47,13 +47,14 @@ export default {
       }
     }
   },
-  [CLEAR_CART](state){
-    //清除foods中的count
-    state.cartFoods.forEach(food=>food.count=0)
-    //移出购车车中所有购物项
-    state.cartFoods = []
+  [CLEAR_CART](state) {
+    // 清除food中的count
+    state.cartFoods.forEach(food => food.count = 0);
+    // 移除购物车中所有购物项  
+    // 注意：如果不进行上面一步操作，直接让cartFoods = [],则会导致，虽然购物车清空了，但是count还是保持原来的数量，
+    // 所以必须要先将 cartFoods 中的food的count都归为0
+    state.cartFoods = [];
   },
-
   [RECEIVE_SEARCH_SHOPS](state,{searchShops}){
     state.searchShops = searchShops
   }
